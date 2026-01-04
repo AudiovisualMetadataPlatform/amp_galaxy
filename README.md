@@ -1,2 +1,2 @@
 # amp_galaxy
-Contains AMP required customizations on vanilla upstream galaxy repo
+Contains AMP required customizations on vanilla upstream galaxy repo, including both full files (if it's a new file not existing in upstream galaxy) and patches of the customized files in galaxy. AMP deploy scripts will super-pose these files and patches onto galaxy code base during build process. This allows AMP to utilize vanilla upstream galaxy without a forked repo. The patches are generated against the galaxy branch used by AMP (i.e. with AMP's latest galaxy upgrade, ideally pointing to the latest Galaxy release branch, but could be a bit behind).
