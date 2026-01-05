@@ -1,0 +1,127 @@
+# Galaxy is configured by default to be usable in a single-user development
+# environment.  To tune the application for a multi-user production
+# environment, see the documentation at:
+# 
+#  https://docs.galaxyproject.org/en/master/admin/production.html
+# 
+# Throughout this sample configuration file, except where stated otherwise,
+# uncommented values override the default if left unset, whereas commented
+# values are set to the default value.  Relative paths are relative to the root
+# Galaxy directory.
+# 
+# Examples of many of these options are explained in more detail in the Galaxy
+# Community Hub.
+# 
+#   https://galaxyproject.org/admin/config
+# 
+# Config hackers are encouraged to check there before asking for help.
+# 
+# Configuration for Gravity process manager.
+# ``uwsgi:`` section placeholder to be ignored if Galaxy is started via Gravity commands (e.g ``./run.sh``, ``galaxy`` or ``galaxyctl``).
+
+
+# AMP customization for Galaxy configuration
+
+gravity:
+
+  # umask under which services should be executed. Setting ``umask`` on an individual service overrides this value.
+  # AMP customization: grant group users rw permissions 
+  umask: '002'
+  
+  gunicorn:
+
+    # The socket to bind. A string of the form: ``HOST``, ``HOST:PORT``, ``unix:PATH``, ``fd://FD``. An IP is a valid HOST.
+    # AMP customization: placeholder to be overwritten by deploy scripts.
+    bind: '0.0.0.0:8000'
+    # below must be set if galaxy is served under a path other than /
+    # bind: /srv/galaxy/var/gunicorn.sock
+    # extra_args: '--forwarded-allow-ips="*"'
+    
+galaxy:
+
+  # URL prefix for Galaxy application. If Galaxy should be served under
+  # a prefix set this to the desired prefix value.
+  # AMP customization: prefix for galaxy URL path if not /; used by proxy for workflow editor
+  galaxy_url_prefix: /rest/galaxy
+
+  # Monitor the tools and tool directories listed in any tool config
+  # file specified in tool_config_file option.  If changes are found,
+  # tools are automatically reloaded. Watchdog (
+  # https://pypi.org/project/watchdog/ ) must be installed and available
+  # to Galaxy to use this option. Other options include 'auto' which
+  # will attempt to watch tools if the watchdog library is available but
+  # won't fail to load Galaxy if it is not and 'polling' which will use
+  # a less efficient monitoring scheme that may work in wider range of
+  # scenarios than the watchdog default.
+  # AMP customization: ensure new tools being detected without restarting Galaxy
+  watch_tools: 'polling'
+  
+  # Force everyone to log in (disable anonymous access).
+  # AMP customization: disallow annoymous users for security reasons
+  require_login: true
+  
+  # Allow unregistered users to create new accounts (otherwise, they
+  # will have to be created by an admin).
+  # AMP customization: disallow self created accounts for security reasons
+  allow_user_creation: false 
+        
+  # Allow admins to paste filesystem paths during upload. For libraries
+  # this adds an option to the admin library upload tool allowing admins
+  # to paste filesystem paths to files and directories in a box, and
+  # these paths will be added to a library.  For history uploads, this
+  # allows pasting in paths as URIs. (i.e. prefixed with file://). Set
+  # to true to enable.  Please note the security implication that this
+  # will give Galaxy Admins access to anything your Galaxy user has
+  # access to.
+  allow_path_paste: true
+        
+  # Administrative users - set this to a comma-separated list of valid
+  # Galaxy users (email addresses).  These users will have access to the
+  # Admin section of the server, and will have access to create users,
+  # groups, roles, libraries, and more.  For more information, see:
+  # https://galaxyproject.org/admin/
+  # AMP customization: placeholder to be overwritten by deploy scripts.
+  admin_users:
+      
+  # Galaxy encodes various internal values when these values placeholder to be
+  # output in some format (for example, in a URL or cookie).  You should
+  # set a key to be used by the algorithm that encodes and decodes these
+  # values. It can be any string with a length between 5 and 56 bytes.
+  # One simple way to generate a value for this is with the shell
+  # command:   python -c 'from __future__ import print_function; import
+  # time; print(time.time())' | md5sum | cut -f 1 -d ' '
+  # AMP customization: placeholder to be overwritten by deploy scripts.
+  id_secret:
+       
+  # The following default adds a header to web request responses that
+  # will cause modern web browsers to not allow Galaxy to be embedded in
+  # the frames of web applications hosted at other hosts - this can help
+  # prevent a class of attack called clickjacking
+  # (https://www.owasp.org/index.php/Clickjacking).  If you configure a
+  # proxy in front of Galaxy - please ensure this header remains intact
+  # to protect your users.  Uncomment and leave empty to not set the
+  # `X-Frame-Options` header.
+  # AMP customization: set to blank to allow embeding Galaxy workflow editor as iframe in AMP UI
+  x_frame_options:     
+  
+  # Log destination, defaults to special value "stdout" that logs to
+  # standard output. If set to anything else, then it will be
+  # interpreted as a path that will be used as the log file, and logging
+  # to stdout will be disabled.
+  log_destination: log/galaxy.log
+
+  # Size of log file at which size it will be rotated as per the
+  # documentation in
+  # https://docs.python.org/library/logging.handlers.html#logging.handlers.RotatingFileHandler
+  # If log_rotate_count is not also set, no log rotation will be
+  # performed. A value of 0 (the default) means no rotation. Size can be
+  # a number of bytes or a human-friendly representation like "100 MB"
+  # or "1G".
+  log_rotate_size: 1 MB
+
+  # Number of log file backups to keep, per the documentation in
+  # https://docs.python.org/library/logging.handlers.html#logging.handlers.RotatingFileHandler
+  # Any additional rotated log files will automatically be pruned. If
+  # log_rotate_size is not also set, no log rotation will be performed.
+  # A value of 0 (the default) means no rotation.
+  log_rotate_count: 10
