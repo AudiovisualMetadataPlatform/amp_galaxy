@@ -1,3 +1,9 @@
+<!-- 
+# Note: 
+# This file will be auto-generated and installed into galaxy/config by AMP Galaxy config script. 
+# The content here is just for reference, and should be practically the same as the auto-generated version.
+-->
+
 <?xml version="1.0"?>
 <job_conf>
     <plugins workers="4">
@@ -15,6 +21,11 @@
         <tool id="hmgm_transcript" destination="lwlw-container"/>
         <tool id="hmgm_ner" destination="lwlw-container"/>
         <tool id="hmgm_segmentation" destination="lwlw-container"/>
-        <tool id="aws_transcribe_stt" destination="lwlw-container"/>        
+        <tool id="aws_transcribe_stt" destination="lwlw-container"/> 
+        <tool id="whisper_stt_cluster" destination="lwlw-container"/>
+        <tool id="aws_comprehend_ner" destination="lwlw-container"/>
+        <tool id="aws_transcribe_stt" destination="lwlw-container"/>
+        <tool id="azure_video_indexer" destination="lwlw-container"/>
+               
     </tools>
 </job_conf>
