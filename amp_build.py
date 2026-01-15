@@ -110,7 +110,7 @@ def main():
                                              user_defaults=Path("amp_config.user_defaults")) 
                 logging.info(f"New package in {new_package}")    
             except Exception as e:
-                logging.error(f"Failed to build backage: {e}")
+                logging.error(f"Failed to build package: {e}")
                 exit(1)
 
 

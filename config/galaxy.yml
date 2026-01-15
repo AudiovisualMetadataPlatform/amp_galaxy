@@ -19,7 +19,10 @@
 # Configuration for Gravity process manager.
 # ``uwsgi:`` section placeholder to be ignored if Galaxy is started via Gravity commands (e.g ``./run.sh``, ``galaxy`` or ``galaxyctl``).
 
-
+# Note: 
+# This file will be auto-generated and installed into galaxy/config by AMP Galaxy config script. 
+# The content here is just for reference, and should be practically the same as the auto-generated version.
+ 
 # AMP customization for Galaxy configuration
 
 gravity:
